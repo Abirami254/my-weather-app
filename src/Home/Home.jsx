@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, HStack, Image, Text, VStack } from "native-base";
 import { ImageBackground, Pressable } from "react-native";
 import { StyleSheet } from "react-native";
@@ -9,12 +9,50 @@ import Star from "../assets/Icons/grade.png";
 import Search from "../assets/Icons/search.png";
 import Temp from "../assets/Icons/img.png";
 import Location from "../assets/Icons/location1.png";
-
 import Humidity from "../assets/Icons/humidity.png";
 import Wind from "../assets/Icons/wind.png";
-import { navigation, navigationRef } from "../Navigator/navigator";
+import { navigation } from "../Navigator/navigator";
+import { useFocusEffect } from "@react-navigation/native";
+import * as ExpoLocation from "expo-location";
 
 function Home() {
+  const [city, setCity] = useState(null);
+
+  const getLocationAsync = async () => {
+    let { status } = await ExpoLocation.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      console.error("Permission to access location was denied");
+      return;
+    }
+
+    try {
+      let location = await ExpoLocation.getCurrentPositionAsync({});
+      const { latitude, longitude } = location.coords;
+      getCityName(latitude, longitude);
+    } catch (error) {
+      console.error("Error getting current location:", error);
+    }
+  };
+  const getCityName = async (latitude, longitude) => {
+    try {
+      const location = await ExpoLocation.reverseGeocodeAsync({
+        latitude,
+        longitude,
+      });
+      if (location.length > 0) {
+        const city = location[0].city;
+        setCity(city); // Set the city state variable with the obtained city name
+        console.log(`City: ${city}`);
+      } else {
+        console.error("City name not found for the provided coordinates");
+      }
+    } catch (error) {
+      console.error("Error getting city name:", error);
+    }
+  };
+  useEffect(() => {
+    getLocationAsync();
+  }, []);
   const currentDate = new Date();
   const currentHour = currentDate.getHours();
   const formattedTime = currentDate.toLocaleString("en-US", {
@@ -38,7 +76,25 @@ function Home() {
   } else {
     backgroundImageSource = require("../assets/1.jpg");
   }
+  const getFunction = async () => {
+    try {
+      const responseJSON = await fetch(
+        `https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&appid=32b5f8c71bc551e143ea2ddc9049d1de`
+      );
+      if (responseJSON.ok) {
+        const response = await responseJSON.json();
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useFocusEffect(
+    React.useCallback(() => {
+      getFunction();
+    }, [])
+  );
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -66,7 +122,15 @@ function Home() {
           <Box justifyContent={"center"} alignItems={"center"}>
             <HStack space={"2"}>
               <Image source={Location} alt="Location" size={"7"} />
-              <Text>City</Text>
+              <Text>
+                {city ? (
+                  <Text color={"#fff"} fontSize={"xl"}>
+                    {city}
+                  </Text>
+                ) : (
+                  <Text>Loading location...</Text>
+                )}
+              </Text>
             </HStack>
             <Box>
               <Text color={"#fff"}>{formattedTime}</Text>

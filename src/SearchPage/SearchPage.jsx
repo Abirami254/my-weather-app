@@ -51,8 +51,8 @@ function SearchPage() {
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    flex: 1, // This makes the background image cover the entire screen
-    resizeMode: "cover", // This ensures the image covers the entire container
+    flex: 1,
+    resizeMode: "cover",
   },
   container: {
     flex: 1,
