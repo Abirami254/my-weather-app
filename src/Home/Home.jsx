@@ -11,6 +11,7 @@ import Temp from "../assets/Icons/img.png";
 import Location from "../assets/Icons/location1.png";
 import Humidity from "../assets/Icons/humidity.png";
 import Wind from "../assets/Icons/wind.png";
+import Cloud from "../assets/Icons/cloud.png";
 import { navigation } from "../Navigator/navigator";
 import { useFocusEffect } from "@react-navigation/native";
 import * as ExpoLocation from "expo-location";
@@ -71,10 +72,10 @@ function Home() {
     backgroundImageSource = require("../assets/2.jpg");
   } else if (currentHour >= 14 && currentHour < 17) {
     backgroundImageSource = require("../assets/3.jpg");
-  } else if (currentHour >= 17 && currentHour < 20) {
+  } else if (currentHour >= 17 && currentHour < 19) {
     backgroundImageSource = require("../assets/5.jpg");
   } else {
-    backgroundImageSource = require("../assets/1.jpg");
+    backgroundImageSource = require("../assets/4.jpg");
   }
   const getFunction = async () => {
     try {
@@ -128,7 +129,7 @@ function Home() {
                     {city}
                   </Text>
                 ) : (
-                  <Text>Loading location...</Text>
+                  <Text>location...</Text>
                 )}
               </Text>
             </HStack>
@@ -139,7 +140,9 @@ function Home() {
               <Text color={"#fff"} fontSize={"7xl"}>
                 forcast
               </Text>
-              <Text fontSize={"lg"}>Scattered</Text>
+              <Text fontSize={"2xl"} color={"#fff"}>
+                Scattered
+              </Text>
             </Box>
             <VStack space={"1/4"} margin={"3"}>
               <HStack
@@ -150,19 +153,19 @@ function Home() {
                 w={"80"}
               >
                 <Box justifyContent={"center"} alignItems={"center"}>
-                  <Image source={Temp} alt="Menu" size={"7"} />
+                  <Image source={Temp} alt="Temp" size={"7"} />
                   <Text>Max Temp</Text>
-                  <Text>Max Temp</Text>
+                  <Text>28°C</Text>
                 </Box>
                 <Box justifyContent={"center"} alignItems={"center"}>
-                  <Image source={Humidity} alt="Menu" size={"7"} />
+                  <Image source={Humidity} alt="Humidity" size={"7"} />
                   <Text>Humidity</Text>
-                  <Text>Max Temp</Text>
+                  <Text>67%</Text>
                 </Box>
                 <Box justifyContent={"center"} alignItems={"center"}>
                   <Image source={Wind} alt="Menu" size={"7"} />
                   <Text>Wind</Text>
-                  <Text>Max Temp</Text>
+                  <Text>2.51 m/s</Text>
                 </Box>
               </HStack>
 
@@ -172,21 +175,25 @@ function Home() {
                 borderRadius={"xl"}
                 padding={"3"}
                 w={"80"}
+                alignItems={"center"}
               >
-                <Box>
-                  <Image source={Menu} alt="Menu" size={"7"} />
-                  <Text>Max Temp</Text>
-                  <Text>Max Temp</Text>
+                <Box w={"1/3"} p="2">
+                  <Text>28.86°C</Text>
+                  <Text fontSize={"sm"}>Scattered Clouds</Text>
+                  <Image source={Cloud} alt="Cloud" size={"7"} />
+                  <Text>11.30 AM</Text>
                 </Box>
-                <Box>
-                  <Image source={Menu} alt="Menu" size={"7"} />
-                  <Text>Humidity</Text>
-                  <Text>Max Temp</Text>
+                <Box w={"1/3"} p="2">
+                  <Text>28.86°C</Text>
+                  <Text fontSize={"sm"}>Scattered Clouds</Text>
+                  <Image source={Cloud} alt="Cloud" size={"7"} />
+                  <Text>12.30 PM</Text>
                 </Box>
-                <Box>
-                  <Image source={Menu} alt="Menu" size={"7"} />
-                  <Text>Wind</Text>
-                  <Text>Max Temp</Text>
+                <Box w={"1/3"} p="2">
+                  <Text>28.86°C</Text>
+                  <Text fontSize={"sm"}>Scattered Clouds</Text>
+                  <Image source={Cloud} alt="Cloud" size={"7"} />
+                  <Text>1.30 PM</Text>
                 </Box>
               </HStack>
             </VStack>

@@ -4,6 +4,9 @@ import Menu from "../assets/Icons/sidebaropen.png";
 import Cal from "../assets/Icons/img_1.png";
 import Back from "../assets/Icons/weatherBack.png";
 import Search from "../assets/Icons/search.png";
+import Sunrise from "../assets/Icons/sunrise.png";
+import Sunset from "../assets/Icons/sunset.png";
+import Cloud from "../assets/Icons/cloud.png";
 
 function DailyWeather() {
   return (
@@ -15,40 +18,64 @@ function DailyWeather() {
         w={"80%"}
       >
         <Image source={Back} alt="back" size={"7"} />
-        <Text fontSize={"3xl"}> DailyWeather </Text>
+        <Text fontSize={"3xl"}>Today Weather Forecast </Text>
       </HStack>
-      <VStack space={"1/4"} margin={"3"}>
+      <Box justifyContent={"center"} alignItems={"center"}>
         <HStack
           justifyContent={"space-around"}
-          background="coolGray.100"
+          alignItems={"center"}
+          background="white"
           borderRadius={"xl"}
           padding={"3"}
           w={"80"}
           shadow={"9"}
         >
           <Box justifyContent={"center"} alignItems={"center"}>
-            <Text>Max Temp</Text>
-            <HStack space={"2"}>
-              <Image source={Search} alt="Search" size={"7"} />
-              <Text>Temp</Text>
-            </HStack>
+            <VStack space={"2"}>
+              <Image source={Sunrise} alt="Sunrise" size={"10"} />
+              <Text>6.23 AM</Text>
+              <Text color={"orange.500"}>Sunrise</Text>
+            </VStack>
           </Box>
           <Box justifyContent={"center"} alignItems={"center"}>
-            <HStack space={"2"}>
-              <Text>Temp</Text>
-              <Image source={Cal} alt="Menu" size={"7"} />
-            </HStack>
-            <Text>Max Temp</Text>
-          </Box>
-          <HStack justifyContent={"center"} alignItems={"center"}>
-            <Image source={Cal} alt="Menu" size={"7"} />
-            <VStack>
-              <Text>Wind</Text>
-              <Text>Max Temp</Text>
+            <VStack space={"2"}>
+              <Image source={Sunset} alt="Sunset" size={"10"} />
+              <Text>6.10 PM</Text>
+              <Text color={"red.500"}>Sunset</Text>
             </VStack>
-          </HStack>
+          </Box>
         </HStack>
-      </VStack>
+      </Box>
+      <Box justifyContent={"center"} alignItems={"center"} mt={"3"}>
+        <HStack
+          justifyContent={"space-around"}
+          background="white"
+          borderRadius={"xl"}
+          padding={"3"}
+          w={"80"}
+          shadow={"9"}
+          alignItems={"center"}
+        >
+          <Box w={"1/3"} p="2">
+            <Text>28.86°C</Text>
+            <Text fontSize={"sm"}>Scattered Clouds</Text>
+            <Image source={Cloud} alt="Cloud" size={"7"} />
+            <Text>11.30 AM</Text>
+          </Box>
+          <Box w={"1/3"} p="2">
+            <Text>28.86°C</Text>
+            <Text fontSize={"sm"}>Scattered Clouds</Text>
+            <Image source={Cloud} alt="Cloud" size={"7"} />
+            <Text>12.30 PM</Text>
+          </Box>
+          <Box w={"1/3"} p="2">
+            <Text>28.86°C</Text>
+            <Text fontSize={"sm"}>Scattered Clouds</Text>
+            <Image source={Cloud} alt="Cloud" size={"7"} />
+            <Text>1.30 PM</Text>
+          </Box>
+        </HStack>
+      </Box>
     </Box>
   );
 }
